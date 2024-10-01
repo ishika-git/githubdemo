@@ -1,8 +1,47 @@
-name: hello-world
-on: push
+name: Python running script
+
+# on:
+#   schedule:
+#     - cron: '0 */12 * * *'
+  
+
+# on:
+#   schedule:
+#     - cron: '23 11 * * *'
+
+on:
+  workflow_dispatch: /manually
+
 jobs:
-  my-job:
-    runs-on: windows-latest
+  scrape:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: my-step
-        run: echo "Hello World!"
+      - name: Checking out repo
+        uses: actions/checkout@v3
+
+      - name: Setting up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      # - name: Removing previous chrome instances on runner 
+      #   run: sudo apt purge google-chrome-stable
+      # - name: Remove default Chromium
+      #   run: sudo apt purge chromium-browser
+      # - name: Install a new Chromium
+      #   run: sudo apt install -y chromium-browser
+      - name: Removing opencv-python
+        run: pip uninstall opencv-python
+        
+      - name: Installing opencv-headless
+        run: pip install opencv-python-headless
+        
+      - name: Installing all necessary packages
+        run: |
+          pip install selenium pyyaml pillow imagehash python-dotenv scikit-image webdriver-manager matplotlib
+
+        
+      
+       - name: Running the python script
+        run: python "name here"
