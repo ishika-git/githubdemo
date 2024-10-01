@@ -10,7 +10,7 @@ name: Python running script
 #     - cron: '23 11 * * *'
 
 on:
-  workflow_dispatch: /manually
+  workflow_dispatch: 
 
 jobs:
   scrape:
@@ -25,23 +25,6 @@ jobs:
         with:
           python-version: '3.9'
 
-      # - name: Removing previous chrome instances on runner 
-      #   run: sudo apt purge google-chrome-stable
-      # - name: Remove default Chromium
-      #   run: sudo apt purge chromium-browser
-      # - name: Install a new Chromium
-      #   run: sudo apt install -y chromium-browser
-      - name: Removing opencv-python
-        run: pip uninstall opencv-python
-        
-      - name: Installing opencv-headless
-        run: pip install opencv-python-headless
-        
-      - name: Installing all necessary packages
-        run: |
-          pip install selenium pyyaml pillow imagehash python-dotenv scikit-image webdriver-manager matplotlib
 
-        
-      
-       - name: Running the python script
-        run: python "name here"
+      - name: Running ishika python script
+        run: python test.py
